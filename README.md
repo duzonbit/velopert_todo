@@ -144,3 +144,40 @@ describe('<TodoApp />', () => {
 
 });
 ```
+
+### Mock Function
+```JavaScript
+import React from "react"
+import { render, fireEvent } from "@testing-library/react"
+import TodoForm from "components/TodoForm"
+
+describe("<TodoForm/>", () => {
+  const setup = (props = {}) => {
+    const utils = render(<TodoForm {...props} />)
+    const { getByText, getByPlaceholderText } = utils
+    const input = getByPlaceholderText("할 일을 입력하세요")
+    const button = getByText("등록")
+    return {
+      ...utils,
+      input,
+      button,
+    }
+  }
+  it("calls onInsert and clears input", () => {
+    // Mock Function
+    const onInsert = jest.fn()
+    const { input, button } = setup({ onInsert })
+    fireEvent.change(input, {
+      target: {
+        value: "TDD 배우기",
+      },
+    })
+    fireEvent.click(button)
+    // 호출 됐다면 어떤 파라미터로 호출 됐는지
+    // onInsert 가 'TDD 배우기' 파라미터가 호출됐어야함
+    expect(onInsert).toBeCalledWith("TDD 배우기")
+    // 이벤트가 호출되고 나서 input이 비워져야함. 
+    expect(input).toHaveAttribute("value", "")
+  })
+})
+```
