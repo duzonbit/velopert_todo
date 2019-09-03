@@ -129,3 +129,114 @@ describe("sum", () => {
    - 중복코드 개선
    - 기능 개선
    - 테스트 케이스 성공
+
+### TodoApp.test.js
+
+```JavaScript
+import React from 'react';
+import TodoApp from './TodoApp';
+import { render, fireEvent } from 'react-testing-library';
+
+describe('<TodoApp />', () => {
+
+  // 등록의 Text와 TodoList의 Id의 존재유무
+  it('renders TodoForm and TodoList', () => {
+    const { getByText, getByTestId } = render(<TodoApp />);
+    getByText('등록'); // TodoForm 존재유무 확인
+    getByTestId('TodoList'); // TodoList 존재유무 확인
+  });
+
+  // default의 값
+  it('renders two defaults todos', () => {
+    const { getByText } = render(<TodoApp />);
+    getByText('TDD 배우기');
+    getByText('react-testing-library 배우기');
+  });
+
+  // Event의 trigger : fireEvent
+  it('creates new todo', () => {
+    const { getByPlaceholderText, getByText } = render(<TodoApp />);
+
+    // 이벤트를 발생시켜서 새 항목을 추가하면
+    fireEvent.change(getByPlaceholderText('할 일을 입력하세요'), {  // change 이벤트를 발생
+      target: {
+        value: '새 항목 추가하기'  // 텍스트창에 '새 항목 추가하기'을 넣는다
+      }
+    });
+
+    fireEvent.click(getByText('등록'));  // 클릭 이벤트를 발생시킨다
+
+    // 해당 항목이 보여져야합니다.
+    getByText('새 항목 추가하기');  // 이벤트가 실행 후 '새 항목 추가하기'가 있는지 검사
+  });
+
+  it('toggles todo', () => {
+    const { getByText } = render(<TodoApp />);
+
+    // TDD 배우기 항목에 클릭 이벤트를 발생시키고 text-decoration 속성이 설정되는지 확인
+    const todoText = getByText('TDD 배우기');
+    expect(todoText).toHaveStyle('text-decoration: line-through;');
+
+    fireEvent.click(todoText);
+    expect(todoText).not.toHaveStyle('text-decoration: line-through;');
+
+    fireEvent.click(todoText);
+    expect(todoText).toHaveStyle('text-decoration: line-through;');
+  });
+
+  it('removes todo', () => {
+    const { getByText } = render(<TodoApp />);
+    const todoText = getByText('TDD 배우기');
+    const removeButton = todoText.nextSibling;
+    fireEvent.click(removeButton);
+    expect(todoText).not.toBeInTheDocument(); // 페이지에서 사라졌음을 의미함
+    /*
+      또 다른 방법:
+      const removedText = queryByText('TDD 배우기');
+      expect(removedText).toBeFalsy();
+    */
+  });
+
+});
+```
+
+### Mock Function
+
+```JavaScript
+import React from "react"
+import { render, fireEvent } from "@testing-library/react"
+import TodoForm from "components/TodoForm"
+
+describe("<TodoForm/>", () => {
+  const setup = (props = {}) => {
+    const utils = render(<TodoForm {...props} />)
+    const { getByText, getByPlaceholderText } = utils
+    const input = getByPlaceholderText("할 일을 입력하세요")
+    const button = getByText("등록")
+    return {
+      ...utils,
+      input,
+      button,
+    }
+  }
+
+  it("calls onInsert and clears input", () => {
+    // Mock Function
+    const onInsert = jest.fn()
+    const { input, button } = setup({ onInsert })
+    fireEvent.change(input, {
+      target: {
+        value: "TDD 배우기",
+      },
+    })
+    
+    fireEvent.click(button)
+    // 호출 됐다면 어떤 파라미터로 호출 됐는지
+    
+    // onInsert 가 'TDD 배우기' 파라미터가 호출됐어야함
+    expect(onInsert).toBeCalledWith("TDD 배우기")
+    // 이벤트가 호출되고 나서 input이 비워져야함.
+    expect(input).toHaveAttribute("value", "")
+  })
+})
+```
