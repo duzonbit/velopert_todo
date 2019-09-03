@@ -33,12 +33,12 @@ NODE_PATH=src/
 > package.json
 
 ```json
-...
+//...
 "scripts": {
-    ...
+    //...
     "clear_jest": "jest --clearCache"
 }
-...
+//...
 ```
 
 > npm script
@@ -47,10 +47,21 @@ npm cache clean --force
 
 ### Dom Test Setup
 
-> setupTests.js - src 하위폴더
+> create-react-app : setupTests.js - src 하위폴더 **_테스트를 실행하기 전에 자동으로 실행됩니다._**
 
 ```js
 import "@testing-library/jest-dom/extend-expect"
+```
+
+> npm run eject -> :
+
+```json
+//...
+"jest": {
+  // ...
+  "setupTestFrameworkScriptFile": "<rootDir>/src/setupTests.js"
+ }
+//...
 ```
 
 ---
