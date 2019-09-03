@@ -144,7 +144,6 @@ describe('<TodoApp />', () => {
 
 });
 ```
-
 ### Mock Function
 ```JavaScript
 import React from "react"
