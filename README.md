@@ -229,10 +229,10 @@ describe("<TodoForm/>", () => {
         value: "TDD 배우기",
       },
     })
-    
+
     fireEvent.click(button)
     // 호출 됐다면 어떤 파라미터로 호출 됐는지
-    
+
     // onInsert 가 'TDD 배우기' 파라미터가 호출됐어야함
     expect(onInsert).toBeCalledWith("TDD 배우기")
     // 이벤트가 호출되고 나서 input이 비워져야함.
