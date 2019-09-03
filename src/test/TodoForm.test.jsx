@@ -17,12 +17,14 @@ describe("<TodoForm/>", () => {
 
   it("has input and a button", () => {
     const { input, button } = setup()
+
     expect(input).toBeTruthy()
     expect(button).toBeTruthy()
   })
 
   it("changes input", () => {
     const { input } = setup()
+
     fireEvent.change(input, {
       target: {
         value: "TDD 배우기",
@@ -33,6 +35,7 @@ describe("<TodoForm/>", () => {
   it("calls onInsert and clears input", () => {
     const onInsert = jest.fn()
     const { input, button } = setup({ onInsert })
+    
     fireEvent.change(input, {
       target: {
         value: "TDD 배우기",
