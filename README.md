@@ -51,7 +51,7 @@
 
 - Test module install
 
-> node @testing-library/jest-dom @types/jest
+> npm i @testing-library/jest-dom @types/jest
 
 - jsconfig.json - 루트 디렉토리 설정 1
 
