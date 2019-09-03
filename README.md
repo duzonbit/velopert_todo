@@ -83,6 +83,23 @@ describe("sum", () => {
 
 ## react-testing-libaray 기초
 
+- Query
+
+|            | No Match 1 | Match 1+ | Match | Await? |
+| ---------- | ---------- | -------- | ----- | ------ |
+| getBy      | throw      | return   | throw | No     |
+| findBy     | throw      | return   | throw | Yes    |
+| queryBy    | null       | return   | throw | No     |
+| getAllBy   | throw      | array    | array | No     |
+| findAllBy  | throw      | array    | array | Yes    |
+| queryAllBy | []         | array    | array | No     |
+
+- How to
+
+```js
+const { getByTestId, getByPlaceholderText, getByText } = render(<TodoApp />)
+```
+
 ---
 
 ## TDD ( 테스트 주도 개발 )
