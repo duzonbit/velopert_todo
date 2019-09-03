@@ -19,13 +19,14 @@ const TodoApp = () => {
   const nextId = useRef(3)
 
   const onInsert = useCallback((text) => {
-    setTodos((todos) =>
-      todos.concat({
+    setTodos((todos) => [
+      ...todos,
+      {
         id: nextId.current,
         text,
         done: false,
-      }),
-    )
+      },
+    ])
     nextId.current += 1
   }, [])
 

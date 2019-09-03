@@ -11,7 +11,8 @@ describe("<TodoApp/>", () => {
 
   it("renders two defaults todos", () => {
     const { getByText } = render(<TodoApp />)
-    getByText("TDD 배우기") //
+
+    getByText("TDD 배우기")
     getByText("react-testing-library 배우기")
   })
 
