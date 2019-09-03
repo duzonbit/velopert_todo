@@ -61,9 +61,9 @@ import "@testing-library/jest-dom/extend-expect"
 ## 테스트 주도 개발(TDD)이란?
 테스트 주도 개발(TDD)은 설계 이후 코드 개발 및 테스트케이스를 작성하는 기존의 개발 프로세스(그림1)와 다르게 테스트케이스를 작성 한 후 실제 코드를 개발하여 리펙토링하는 절차(그림2)를 따른다. 이러한 이유로 TDD를 Test First Development라고도 한다.
 1. 기존의 프로세스  
-![기존 프로세스](./image/image2.png)
+![기존 프로세스](./image/image1.png)
 1. TDD 프로세스  
-![TDD 프로세스](./image/image1.png)
+![TDD 프로세스](./image/image2.png)
 
 + TDD 장점
     -  작업과 동시에 테스트를 진행함으로써 실시간으로 오류 상황을 파악하여 시스템 결함을 방지
