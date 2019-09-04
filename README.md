@@ -47,6 +47,11 @@
 
 ## 환경 설정
 
+### vscode extension
+
+- [snippet](https://marketplace.visualstudio.com/items?itemName=andys8.jest-snippets)
+- [jest](https://marketplace.visualstudio.com/items?itemName=Orta.vscode-jest)
+
 ### npm
 
 - Test module install
