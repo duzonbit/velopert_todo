@@ -99,9 +99,13 @@ npm cache clean --force
 
 > create-react-app : setupTests.js - src 하위폴더 **_테스트를 실행하기 전에 자동으로 실행됩니다._**
 
+- react에서 dom 시뮬레이션을 위한 jsdom이라는 도구를 사용하여 `document.body` 에 리엑트 컴포넌트를 렌더링함
+
 ```js
 import "@testing-library/jest-dom/extend-expect"
 ```
+
+- `jest-dom/extend-expect` 를 불러와 jest에서 `DOM` 관련 `matcher` 를 사용 가능
 
 > npm run eject -> :
 
@@ -128,6 +132,14 @@ describe("sum", () => {
 > **describe** - 관심 묶기  
 > **it** - 테스트 케이스  
 > **expect** - 테스트 실행기
+
+### expect
+
+```jsx
+  expect(mount).toMatchSnapshot() // enzyme 스냅샷 찍기
+  expect(render.container).toMatchSnapshot() //rtl 스냅샷 찍기
+  expect(property).toBe('match') // match와 같은지
+```
 
 ## react-testing-libaray 기초
 
