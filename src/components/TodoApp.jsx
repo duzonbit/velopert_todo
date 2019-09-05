@@ -7,16 +7,17 @@ const TodoApp = () => {
     {
       id: 1,
       text: "TDD 배우기",
-      done: true,
+      done: false,
     },
     {
       id: 2,
       text: "react-testing-library 배우기",
       done: true,
     },
-  ])
+  ]);
 
-  const nextId = useRef(3)
+  const nextId = useRef(3); // 새로 추가 할 항목에서 사용 할 id
+  // ref : 이전화면
 
   const onInsert = useCallback((text) => {
     setTodos((todos) => [
@@ -28,15 +29,15 @@ const TodoApp = () => {
       },
     ])
     nextId.current += 1
-  }, [])
+  }, []);
 
   const onToggle = useCallback((id) => {
     setTodos((todos) => todos.map((todo) => (todo.id === id ? { ...todo, done: !todo.done } : todo)))
-  }, [])
+  }, []);
 
   const onRemove = useCallback((id) => {
     setTodos((todos) => todos.filter((todo) => todo.id !== id))
-  }, [])
+  }, []);
 
   return (
     <>
